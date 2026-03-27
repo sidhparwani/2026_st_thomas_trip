@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St. Thomas 2026 🌴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #F5EFE0;
+    --sand-dark: #EDE3CC;
+    --ocean: #2A7EA6;
+    --ocean-deep: #1A5472;
+    --ocean-light: #5BAFD4;
+    --ocean-pale: #E0F2FA;
+    --coral: #E8704A;
+    --coral-light: #FDEEE8;
+    --palm: #2D6A4F;
+    --palm-light: #E8F5EE;
+    --gold: #C9952A;
+    --gold-light: #FDF4E3;
+    --text: #1C2B35;
+    --text-muted: #5A7080;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sand);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── WAVE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 100vh;
+    background:
+      radial-gradient(ellipse 80% 50% at 110% 10%, rgba(42,126,166,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at -10% 80%, rgba(91,175,212,0.10) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(245,239,224,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(42,126,166,0.15);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--ocean-deep);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ocean); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #1A5472 0%, #2A7EA6 45%, #5BAFD4 100%);
+    padding: 100px 2rem 80px;
+    text-align: center;
+    z-index: 1;
+  }
+  .hero-waves {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    overflow: hidden;
+  }
+  .hero-waves svg { display: block; width: 100%; height: 100%; }
+
+  /* animated wave rings */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 600px; height: 600px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.06);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.4; }
+    50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.1; }
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 80px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.72);
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown {
+    display: inline-flex;
+    gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 10px 24px;
+    position: relative;
+    backdrop-filter: blur(8px);
+  }
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .countdown-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    min-width: 42px;
+    text-align: center;
+  }
+  .countdown-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .countdown-sep {
+    font-size: 24px;
+    color: rgba(255,255,255,0.3);
+    padding-top: 4px;
+    align-self: flex-start;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  section { padding: 72px 0; scroll-margin-top: 58px; }
+  section:nth-child(even) { background: rgba(255,255,255,0.45); }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ocean);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+  .section-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    max-width: 560px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(42,126,166,0.1);
+    padding: 1.5rem;
+    box-shadow: 0 2px 20px rgba(26,84,114,0.06);
+  }
+  .card-muted {
+    background: var(--sand);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(42,126,166,0.08);
+    padding: 1rem 1.25rem;
+  }
+
+  /* ── FLIGHTS ── */
+  .flights-grid { display: grid; gap: 16px; }
+  .flight-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(42,126,166,0.1);
+    padding: 1.5rem 1.75rem;
+    box-shadow: 0 2px 20px rgba(26,84,114,0.06);
+  }
+  .flight-leg-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ocean);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .flight-leg-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(42,126,166,0.15);
+  }
+  .flight-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .flight-endpoint { flex: 1; }
+  .flight-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .flight-iata {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .flight-city {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .flight-middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1.2;
+  }
+  .flight-line {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .flight-line-track {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--ocean-light), var(--ocean));
+    position: relative;
+  }
+  .flight-line-track::after {
+    content: '✈';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    font-size: 14px;
+    background: var(--white);
+    padding: 0 4px;
+  }
+  .flight-duration {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .flight-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(42,126,166,0.1);
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+  }
+  .tag-blue { background: var(--ocean-pale); color: var(--ocean-deep); }
+  .tag-green { background: var(--palm-light); color: var(--palm); }
+  .tag-sand { background: var(--sand-dark); color: var(--text-muted); }
+  .tag-coral { background: var(--coral-light); color: var(--coral); }
+  .tag-gold { background: var(--gold-light); color: var(--gold); }
+
+  .alert {
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 14px;
+  }
+  .alert-gold { background: var(--gold-light); color: #7A5A18; border-left: 3px solid var(--gold); }
+  .alert-blue { background: var(--ocean-pale); color: var(--ocean-deep); border-left: 3px solid var(--ocean-light); }
+
+  /* ── MAP ── */
+  .map-container {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(42,126,166,0.15);
+    box-shadow: 0 4px 30px rgba(26,84,114,0.10);
+    margin-bottom: 24px;
+  }
+  .islands-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .island-card {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(42,126,166,0.1);
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .island-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .island-icon-blue { background: var(--ocean-pale); }
+  .island-icon-green { background: var(--palm-light); }
+  .island-icon-coral { background: var(--coral-light); }
+  .island-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .island-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── ITINERARY ── */
+  .itinerary-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid rgba(42,126,166,0.1);
+    padding-bottom: 0;
+  }
+  .itin-tab {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    border-radius: 0;
+  }
+  .itin-tab:hover { color: var(--ocean); }
+  .itin-tab.active { color: var(--ocean); border-bottom-color: var(--ocean); }
+  .itin-panel { display: none; }
+  .itin-panel.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .itin-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .itin-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--text); }
+  .itin-subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+  .day-timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .day-block {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(42,126,166,0.1);
+    padding: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .day-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--ocean-light), var(--ocean));
+  }
+  .day-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ocean); margin-bottom: 6px; }
+  .day-content { font-size: 13px; color: var(--text); line-height: 1.5; }
+
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 600px) { .pros-cons { grid-template-columns: 1fr; } }
+  .pro-box, .con-box { border-radius: var(--radius-sm); padding: 16px; }
+  .pro-box { background: var(--palm-light); border: 1px solid rgba(45,106,79,0.15); }
+  .con-box { background: var(--coral-light); border: 1px solid rgba(232,112,74,0.15); }
+  .pc-head { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+  .pc-head.pro { color: var(--palm); }
+  .pc-head.con { color: var(--coral); }
+  .pc-item { font-size: 13px; color: var(--text); margin-bottom: 7px; padding-left: 16px; position: relative; line-height: 1.5; }
+  .pc-item::before { position: absolute; left: 0; font-size: 11px; top: 3px; }
+  .pc-item.pro::before { content: '✓'; color: var(--palm); }
+  .pc-item.con::before { content: '✗'; color: var(--coral); }
+
+  .tip-box {
+    background: var(--ocean-pale);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    border-left: 3px solid var(--ocean-light);
+    font-size: 13px;
+    color: var(--ocean-deep);
+    line-height: 1.6;
+  }
+
+  /* ── CHARTER ── */
+  .charter-wrapper {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 2px solid var(--ocean-light);
+    padding: 2rem;
+    box-shadow: 0 4px 30px rgba(42,126,166,0.10);
+  }
+  .charter-q { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .charter-price {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ocean-pale);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ocean-deep);
+    margin-bottom: 24px;
+  }
+  .charter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .charter-grid { grid-template-columns: 1fr; } }
+  .charter-without {
+    background: var(--sand);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── BUDGET ── */
+  .budget-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .budget-card {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(42,126,166,0.1);
+    padding: 18px 16px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(26,84,114,0.05);
+  }
+  .budget-icon { font-size: 22px; margin-bottom: 8px; }
+  .budget-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+  .budget-value { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .budget-per { font-size: 11px; color: var(--text-muted); }
+  .rental-explainer {
+    background: var(--gold-light);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(201,149,42,0.2);
+    padding: 16px 20px;
+  }
+  .rental-explainer h4 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 10px; }
+  .rental-explainer ul { list-style: none; }
+  .rental-explainer ul li { font-size: 13px; color: var(--text-muted); padding: 4px 0 4px 16px; position: relative; line-height: 1.5; }
+  .rental-explainer ul li::before { content: '·'; position: absolute; left: 4px; font-weight: 700; color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ocean-deep);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 32px 2rem;
+    font-size: 13px;
+    position: relative;
+    z-index: 1;
+  }
+  footer strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .hero { padding: 70px 1.25rem 60px; }
+    .flight-time { font-size: 26px; }
+    .countdown-num { font-size: 22px; min-width: 32px; }
+    section { padding: 52px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">St. Thomas '26 🌴</a>
+    <ul class="nav-links">
+      <li><a href="#flights">Flights</a></li>
+      <li><a href="#map">Islands</a></li>
+      <li><a href="#itinerary">Itinerary</a></li>
+      <li><a href="#charter">Charter</a></li>
+      <li><a href="#budget">Budget</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Group Trip · June 18–21, 2026</div>
+  <h1>St. Thomas<br><em>& Beyond</em></h1>
+  <p class="hero-sub">US Virgin Islands · Sun, sand, and open water</p>
+
+  <div class="countdown" id="countdown">
+    <div class="countdown-unit">
+      <div class="countdown-num" id="cd-days">—</div>
+      <div class="countdown-label">Days</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <div class="countdown-num" id="cd-hours">—</div>
+      <div class="countdown-label">Hours</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <div class="countdown-num" id="cd-mins">—</div>
+      <div class="countdown-label">Mins</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <div class="countdown-num" id="cd-secs">—</div>
+      <div class="countdown-label">Secs</div>
+    </div>
+  </div>
+
+  <div class="hero-waves">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z" fill="#F5EFE0"/>
+    </svg>
+  </div>
+</div>
+
+<!-- FLIGHTS -->
+<section id="flights">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Getting There</div>
+      <h2 class="section-title">Flights</h2>
+      <p class="section-sub">Nonstop Spirit Airlines both ways — MCO to STT and back. ~$250/person target fare.</p>
+    </div>
+
+    <div class="flights-grid reveal">
+      <div class="flight-card">
+        <div class="flight-leg-label">✈ Outbound &nbsp;·&nbsp; Thursday, June 18</div>
+        <div class="flight-row">
+          <div class="flight-endpoint">
+            <div class="flight-time">11:30<span style="font-size:18px;color:var(--text-muted)">am</span></div>
+            <div class="flight-iata">MCO</div>
+            <div class="flight-city">Orlando, FL</div>
+          </div>
+          <div class="flight-middle">
+            <div class="flight-line">
+              <div class="flight-line-track"></div>
+            </div>
+            <div class="flight-duration">3h 00m · Nonstop</div>
+          </div>
+          <div class="flight-endpoint" style="text-align:right">
+            <div class="flight-time">2:30<span style="font-size:18px;color:var(--text-muted)">pm</span></div>
+            <div class="flight-iata">STT</div>
+            <div class="flight-city">St. Thomas, USVI</div>
+          </div>
+        </div>
+        <div class="flight-tags">
+          <span class="tag tag-blue">Spirit NK284</span>
+          <span class="tag tag-sand">Airbus A320</span>
+          <span class="tag tag-sand">Terminal A · MCO</span>
+          <span class="tag tag-green">Nonstop</span>
+        </div>
+      </div>
+
+      <div class="flight-card">
+        <div class="flight-leg-label">✈ Return &nbsp;·&nbsp; Sunday, June 21</div>
+        <div class="flight-row">
+          <div class="flight-endpoint">
+            <div class="flight-time">3:25<span style="font-size:18px;color:var(--text-muted)">pm</span></div>
+            <div class="flight-iata">STT</div>
+            <div class="flight-city">St. Thomas, USVI</div>
+          </div>
+          <div class="flight-middle">
+            <div class="flight-line">
+              <div class="flight-line-track" style="background:linear-gradient(90deg,var(--ocean),var(--ocean-light))"></div>
+            </div>
+            <div class="flight-duration">3h 15m · Nonstop</div>
+          </div>
+          <div class="flight-endpoint" style="text-align:right">
+            <div class="flight-time">6:40<span style="font-size:18px;color:var(--text-muted)">pm</span></div>
+            <div class="flight-iata">MCO</div>
+            <div class="flight-city">Orlando, FL</div>
+          </div>
+        </div>
+        <div class="flight-tags">
+          <span class="tag tag-blue">Spirit NK277</span>
+          <span class="tag tag-sand">Airbus A320</span>
+          <span class="tag tag-sand">Terminal A · MCO</span>
+          <span class="tag tag-green">Nonstop</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-gold reveal">
+      ⚠️ <strong>Spirit baggage heads up:</strong> Base fare only includes 1 free personal item (18×14×8 in). Carry-ons and checked bags are extra — add at booking for the lowest price (~$45/bag). Consider upgrading to Spirit First for carry-on + checked bag included. Times above based on current schedule — confirm at booking.
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Where We're Going</div>
+      <h2 class="section-title">The Islands</h2>
+      <p class="section-sub">St. Thomas is our home base. St. John is 20 minutes away by ferry. Virgin Gorda (BVI) is farther east — a longer boat ride but home to The Baths.</p>
+    </div>
+    <div class="map-container reveal">
+      <iframe
+        width="100%" height="380"
+        style="border:0;display:block;"
+        loading="lazy"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-65.05%2C18.20%2C-64.30%2C18.55&layer=mapnik&marker=18.3408%2C-64.9306">
+      </iframe>
+    </div>
+    <div style="text-align:right;margin-top:6px;margin-bottom:16px;">
+      <a href="https://www.openstreetmap.org/#map=12/18.37/-64.68" target="_blank" style="font-size:11px;color:var(--text-muted);text-decoration:none;">View larger map ↗</a>
+    </div>
+    <div class="islands-legend reveal">
+      <div class="island-card">
+        <div class="island-icon island-icon-blue">✈</div>
+        <div>
+          <div class="island-name">St. Thomas (STT)</div>
+          <div class="island-desc">Home base. Charlotte Amalie, Magens Bay, Coki Beach. Great food, shopping, and nightlife. No passport needed.</div>
+        </div>
+      </div>
+      <div class="island-card">
+        <div class="island-icon island-icon-green">🌿</div>
+        <div>
+          <div class="island-name">St. John (USVI)</div>
+          <div class="island-desc">20-min ferry from Red Hook. ~60% national park. Trunk Bay, Cinnamon Bay, Lime Out floating restaurant. No passport.</div>
+        </div>
+      </div>
+      <div class="island-card">
+        <div class="island-icon island-icon-coral">🪨</div>
+        <div>
+          <div class="island-name">Virgin Gorda (BVI)</div>
+          <div class="island-desc">The Baths: massive boulder grottos and sea caves. Longer boat ride (~1.5–2 hrs). Passport required + BVI customs.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section id="itinerary">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">The Plan</div>
+      <h2 class="section-title">Itinerary Options</h2>
+      <p class="section-sub">Two solid options for our island-hopping day. Pick your adventure.</p>
+    </div>
+    <div class="reveal">
+      <div class="itinerary-tabs">
+        <button class="itin-tab active" onclick="switchTab('opt1', this)">Option 1 · St. John</button>
+        <button class="itin-tab" onclick="switchTab('opt2', this)">Option 2 · Virgin Gorda</button>
+      </div>
+
+      <!-- Option 1 -->
+      <div id="opt1" class="itin-panel active">
+        <div class="itin-header">
+          <div>
+            <div class="itin-title">St. Thomas + St. John</div>
+            <div class="itin-subtitle">1.5 days St. Thomas · 1 day St. John · No passport needed</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:flex-start">
+            <span class="tag tag-green">No Passport</span>
+            <span class="tag tag-blue">Easy Commute</span>
+          </div>
+        </div>
+        <div class="day-timeline">
+          <div class="day-block">
+            <div class="day-label">Day 1 · Thu PM</div>
+            <div class="day-content">Arrive STT · Check in · Explore Charlotte Amalie · Sunset drinks</div>
+          </div>
+          <div class="day-block">
+            <div class="day-label">Day 2 · Friday</div>
+            <div class="day-content">St. Thomas — Magens Bay, Coki Beach, food, shopping</div>
+          </div>
+          <div class="day-block">
+            <div class="day-label">Day 3 · Saturday</div>
+            <div class="day-content">Ferry to St. John — Trunk Bay, Lime Out, hike, snorkel</div>
+          </div>
+          <div class="day-block">
+            <div class="day-label">Day 4 · Sun</div>
+            <div class="day-content">Morning swim or brunch · Head to airport · Fly home ~4pm</div>
+          </div>
+        </div>
+        <div class="pros-cons">
+          <div class="pro-box">
+            <div class="pc-head pro">Pros</div>
+            <div class="pc-item pro">No passport required (USVI territory)</div>
+            <div class="pc-item pro">Easy 20-min ferry from Red Hook</div>
+            <div class="pc-item pro">Rental car gets you to the ferry — and onto St. John</div>
+            <div class="pc-item pro">Trunk Bay — one of the world's best beaches</div>
+            <div class="pc-item pro">More relaxed logistics</div>
+            <div class="pc-item pro">Ferry ~$15–20/pp round trip</div>
+          </div>
+          <div class="con-box">
+            <div class="pc-head con">Cons</div>
+            <div class="pc-item con">Car ferry adds time vs. passenger-only ferry</div>
+            <div class="pc-item con">Trunk Bay can get crowded midday</div>
+          </div>
+        </div>
+        <div class="tip-box">
+          💡 <strong>Lime Out</strong> — the famous floating taco bar — is on St. John. With a private charter, you sail right up. Without one, it's a $30/pp water taxi on top of your ferry fare.
+        </div>
+      </div>
+
+      <!-- Option 2 -->
+      <div id="opt2" class="itin-panel">
+        <div class="itin-header">
+          <div>
+            <div class="itin-title">St. Thomas + Virgin Gorda</div>
+            <div class="itin-subtitle">1.5 days St. Thomas · 1 day at The Baths (BVI) · Passport required</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:flex-start">
+            <span class="tag tag-coral">Passport Required</span>
+            <span class="tag tag-gold">Bucket List</span>
+          </div>
+        </div>
+        <div class="day-timeline">
+          <div class="day-block">
+            <div class="day-label">Day 1 · Thu PM</div>
+            <div class="day-content">Arrive STT · Check in · Explore · Dinner</div>
+          </div>
+          <div class="day-block">
+            <div class="day-label">Day 2 · Friday</div>
+            <div class="day-content">St. Thomas — beaches, Charlotte Amalie, food</div>
+          </div>
+          <div class="day-block">
+            <div class="day-label">Day 3 · Saturday</div>
+            <div class="day-content">Charter to Virgin Gorda — The Baths caves, grottos, snorkel</div>
+          </div>
+          <div class="day-block">
+            <div class="day-label">Day 4 · Sun</div>
+            <div class="day-content">Morning swim · Head to airport · Fly home ~4pm</div>
+          </div>
+        </div>
+        <div class="pros-cons">
+          <div class="pro-box">
+            <div class="pc-head pro">Pros</div>
+            <div class="pc-item pro">The Baths — giant boulders, sea caves, surreal landscape</div>
+            <div class="pc-item pro">Fewer tourists than popular USVI spots</div>
+            <div class="pc-item pro">Snorkeling in the caves is unforgettable</div>
+            <div class="pc-item pro">British Virgin Islands = true bucket list</div>
+          </div>
+          <div class="con-box">
+            <div class="pc-head con">Cons</div>
+            <div class="pc-item con">Everyone needs a valid passport</div>
+            <div class="pc-item con">~1.5–2 hours each way by boat</div>
+            <div class="pc-item con">BVI customs & immigration adds time</div>
+            <div class="pc-item con">Charter boat essentially required</div>
+            <div class="pc-item con">BVI clearance fees add cost</div>
+          </div>
+        </div>
+        <div class="tip-box">
+          💡 A private charter is pretty much essential for this option — you won't want to spend all day on crowded public transport doing customs clearance. Budget accordingly.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTER -->
+<section id="charter">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Open Question</div>
+      <h2 class="section-title">Private Charter Boat?</h2>
+      <p class="section-sub">The big decision for Day 3. Here's the full case for and against.</p>
+    </div>
+    <div class="charter-wrapper reveal">
+      <div class="charter-q">Do we charter a private boat for Day 3?</div>
+      <div class="charter-price">⚓ ~$100–200 per person · Full day on the water</div>
+      <div class="charter-grid">
+        <div class="pro-box" style="background:var(--palm-light);border:1px solid rgba(45,106,79,0.15)">
+          <div class="pc-head pro">Yes — Charter it</div>
+          <div class="pc-item pro">Private boat — just our group, our schedule</div>
+          <div class="pc-item pro">Visit multiple beaches in one day</div>
+          <div class="pc-item pro">Open water swimming between stops</div>
+          <div class="pc-item pro">Lime Out floating restaurant included (saves $30/pp)</div>
+          <div class="pc-item pro">Captain handles all the navigation</div>
+          <div class="pc-item pro">Coolers, shade, and hanging on deck</div>
+          <div class="pc-item pro">Only viable option for Virgin Gorda</div>
+        </div>
+        <div class="con-box" style="background:var(--coral-light);border:1px solid rgba(232,112,74,0.15)">
+          <div class="pc-head con">No — Skip It</div>
+          <div class="pc-item con">$100–200/pp is a real cost for a group</div>
+          <div class="pc-item con">St. John ferry is totally doable on its own</div>
+          <div class="pc-item con">Less flexibility if weather changes plans</div>
+        </div>
+      </div>
+      <div class="charter-without">
+        <strong style="color:var(--text)">Without a charter (St. John only):</strong><br>
+        Red Hook ferry (~$15–20/pp) → St. John taxi → Lime Out water taxi (~$30/pp) → taxi back → ferry back. Lots of transfers and per-person costs add up fast. Doable, but less seamless.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Money Talk</div>
+      <h2 class="section-title">Budget Breakdown</h2>
+      <p class="section-sub">Per-person estimates for the key expenses. Rental car is shared — one of the best deals on the island.</p>
+    </div>
+    <div class="budget-grid reveal">
+      <div class="budget-card">
+        <div class="budget-icon">✈️</div>
+        <div class="budget-label">Flights</div>
+        <div class="budget-value">~$250</div>
+        <div class="budget-per">per person (target)</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">🌮</div>
+        <div class="budget-label">Lunch</div>
+        <div class="budget-value">$15–25</div>
+        <div class="budget-per">per person</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">🍽️</div>
+        <div class="budget-label">Dinner</div>
+        <div class="budget-value">$25–30</div>
+        <div class="budget-per">per person</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">🚗</div>
+        <div class="budget-label">Rental Car</div>
+        <div class="budget-value">~$100</div>
+        <div class="budget-per">per car / day + gas</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">⚓</div>
+        <div class="budget-label">Charter Boat</div>
+        <div class="budget-value">$100–200</div>
+        <div class="budget-per">per person (if yes)</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">⛴️</div>
+        <div class="budget-label">St. John Ferry</div>
+        <div class="budget-value">$15–20</div>
+        <div class="budget-per">per person, round trip</div>
+      </div>
+    </div>
+
+    <div class="rental-explainer reveal">
+      <h4>🚗 Rental car vs. taxi — rental wins for groups</h4>
+      <ul>
+        <li>No Uber or Lyft on St. Thomas — taxi association has a monopoly. Taxis charge <strong>per person</strong>, $10–30/pp each way.</li>
+        <li>A $100/day rental split among 4–5 people is just $20–25/person/day — far cheaper than taxis for island exploring.</li>
+        <li>Heads up: driving is on the <strong>left side of the road</strong> in USVI (steering wheel is still on the left though).</li>
+        <li>You <strong>can</strong> take your rental car on the St. John ferry — a big advantage over taxis for exploring the island.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>St. Thomas 2026</strong> · June 18–21 · US Virgin Islands<br>
+  <span style="margin-top:6px;display:block">Built for the crew ✌️</span>
+</footer>
+
+<script>
+  // ── COUNTDOWN ──
+  function updateCountdown() {
+    const trip = new Date('2026-06-18T11:30:00-04:00');
+    const now = new Date();
+    const diff = trip - now;
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML = '<div style="color:#fff;font-family:Playfair Display,serif;font-size:22px">We\'re in paradise! 🌴</div>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ── ITINERARY TABS ──
+  function switchTab(id, btn) {
+    document.querySelectorAll('.itin-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.itin-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
