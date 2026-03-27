@@ -579,6 +579,76 @@
     .countdown-num { font-size: 22px; min-width: 32px; }
     section { padding: 52px 0; }
   }
+
+  /* ── GUIDE CARDS (food / restaurants) ── */
+  .guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .guide-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(42,126,166,0.1);
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(26,84,114,0.05);
+  }
+  .guide-card-top {
+    padding: 16px 18px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .guide-emoji { font-size: 24px; }
+  .guide-badge { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.04em; }
+  .guide-card-body { padding: 14px 18px 16px; }
+  .guide-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .guide-loc { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+  .guide-desc { font-size: 13px; color: var(--text); line-height: 1.6; margin-bottom: 10px; }
+  .guide-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+  /* ── BEACH LIST ── */
+  .beach-list { display: flex; flex-direction: column; gap: 14px; }
+  .beach-item {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(42,126,166,0.1);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    box-shadow: 0 2px 12px rgba(26,84,114,0.04);
+  }
+  .beach-rank {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ocean-light);
+    line-height: 1;
+    min-width: 28px;
+    padding-top: 2px;
+  }
+  .beach-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .beach-pill { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
+  .beach-desc { font-size: 13px; color: var(--text); line-height: 1.6; margin-bottom: 8px; }
+  .beach-meta { font-size: 12px; color: var(--text-muted); }
+
+  /* ── ATTRACTIONS GRID ── */
+  .attr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .attr-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(42,126,166,0.1);
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 2px 12px rgba(26,84,114,0.04);
+  }
+  .attr-icon { font-size: 28px; margin-bottom: 10px; }
+  .attr-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 8px; line-height: 1.35; }
+  .attr-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -593,6 +663,9 @@
       <li><a href="#itinerary">Itinerary</a></li>
       <li><a href="#charter">Charter</a></li>
       <li><a href="#budget">Budget</a></li>
+      <li><a href="#food">Food</a></li>
+      <li><a href="#beaches">Beaches</a></li>
+      <li><a href="#attractions">Attractions</a></li>
     </ul>
   </div>
 </nav>
@@ -713,17 +786,52 @@
       <h2 class="section-title">The Islands</h2>
       <p class="section-sub">St. Thomas is our home base. St. John is 20 minutes away by ferry. Virgin Gorda (BVI) is farther east — a longer boat ride but home to The Baths.</p>
     </div>
-    <div class="map-container reveal">
-      <iframe
-        width="100%" height="380"
-        style="border:0;display:block;"
-        loading="lazy"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-65.05%2C18.20%2C-64.30%2C18.55&layer=mapnik&marker=18.3408%2C-64.9306">
-      </iframe>
+    <div class="map-container reveal" style="height:420px;position:relative;">
+      <div id="satellite-map" style="width:100%;height:100%;"></div>
     </div>
     <div style="text-align:right;margin-top:6px;margin-bottom:16px;">
-      <a href="https://www.openstreetmap.org/#map=12/18.37/-64.68" target="_blank" style="font-size:11px;color:var(--text-muted);text-decoration:none;">View larger map ↗</a>
+      <span style="font-size:11px;color:var(--text-muted);">Satellite imagery © Esri · Click pins to explore</span>
     </div>
+    <script>
+      (function() {
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        document.head.appendChild(css);
+
+        var s = document.createElement('script');
+        s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        s.onload = function() {
+          var map = L.map('satellite-map', { zoomControl: true, scrollWheelZoom: false }).setView([18.36, -64.78], 11);
+          L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri',
+            maxZoom: 18
+          }).addTo(map);
+
+          var blueIcon  = L.divIcon({ className:'', html:'<div style="background:#2A7EA6;border:3px solid #fff;border-radius:50%;width:16px;height:16px;box-shadow:0 2px 6px rgba(0,0,0,0.4)"></div>', iconSize:[16,16], iconAnchor:[8,8] });
+          var greenIcon = L.divIcon({ className:'', html:'<div style="background:#2D6A4F;border:3px solid #fff;border-radius:50%;width:16px;height:16px;box-shadow:0 2px 6px rgba(0,0,0,0.4)"></div>', iconSize:[16,16], iconAnchor:[8,8] });
+          var coralIcon = L.divIcon({ className:'', html:'<div style="background:#E8704A;border:3px solid #fff;border-radius:50%;width:14px;height:14px;box-shadow:0 2px 6px rgba(0,0,0,0.4)"></div>', iconSize:[14,14], iconAnchor:[7,7] });
+          var starIcon  = L.divIcon({ className:'', html:'<div style="background:#C9952A;border:2px solid #fff;border-radius:3px;width:12px;height:12px;box-shadow:0 1px 4px rgba(0,0,0,0.4)"></div>', iconSize:[12,12], iconAnchor:[6,6] });
+
+          L.marker([18.3408,-64.9306], {icon:blueIcon}).addTo(map).bindPopup('<b>✈ St. Thomas</b><br>Your home base · Fly in Jun 18');
+          L.marker([18.3321,-64.7968], {icon:greenIcon}).addTo(map).bindPopup('<b>🌿 St. John</b><br>20-min ferry from Red Hook · No passport');
+          L.marker([18.4958,-64.4335], {icon:coralIcon}).addTo(map).bindPopup('<b>🪨 Virgin Gorda (BVI)</b><br>The Baths · Passport required · ~1.5hr by boat');
+
+          [
+            [[18.3926,-64.9556],'🏖️ Magens Bay','Best classic beach on St. Thomas'],
+            [[18.3441,-64.8731],'🤿 Sapphire Beach','Top snorkeling on St. Thomas'],
+            [[18.3497,-64.8636],'💎 Lindquist Beach','Local secret — crystal clear water'],
+            [[18.3695,-64.8455],'🏄 Hull Bay','Local vibe + Fish Bar'],
+            [[18.3535,-64.7459],'🌊 Trunk Bay','World-famous · St. John national park'],
+            [[18.3604,-64.7237],'🐢 Maho Bay','Swim with sea turtles'],
+            [[18.4473,-64.4494],'🪨 The Baths','Bucket-list boulder grottos · Virgin Gorda'],
+          ].forEach(function(b) {
+            L.marker(b[0], {icon:starIcon}).addTo(map).bindPopup('<b>'+b[1]+'</b><br>'+b[2]);
+          });
+        };
+        document.head.appendChild(s);
+      })();
+    </script>
     <div class="islands-legend reveal">
       <div class="island-card">
         <div class="island-icon island-icon-blue">✈</div>
@@ -966,6 +1074,478 @@
   </div>
 </section>
 
+<!-- FOOD & RESTAURANTS -->
+<section id="food">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">What to Eat</div>
+      <h2 class="section-title">Local Food Guide</h2>
+      <p class="section-sub">Forget the tourist menus. These are the authentic Caribbean dishes you need to try while you're here — most found across St. Thomas and St. John.</p>
+    </div>
+    <div class="reveal">
+      <div class="itinerary-tabs">
+        <button class="itin-tab active" onclick="switchTab2('food-stt', this)">St. Thomas & St. John</button>
+        <button class="itin-tab" onclick="switchTab2('food-vg', this)">Virgin Gorda</button>
+      </div>
+
+      <!-- ST THOMAS & ST JOHN FOOD -->
+      <div id="food-stt" class="itin-panel active">
+        <div class="guide-grid">
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--ocean-pale)">
+              <div class="guide-emoji">🌾</div>
+              <div class="guide-badge tag-blue">Must Try</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Fungi</div>
+              <div class="guide-desc">The unofficial national dish of the USVI. A thick, savory cornmeal pudding cooked with okra — similar to polenta but distinctly Caribbean. Almost always served as a side with fish or stewed meat. Don't leave without trying it.</div>
+              <div class="guide-tags"><span class="tag tag-blue">USVI Staple</span><span class="tag tag-sand">Side Dish</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--coral-light)">
+              <div class="guide-emoji">🥩</div>
+              <div class="guide-badge tag-coral">BBQ Culture</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Caribbean BBQ</div>
+              <div class="guide-desc">A whole different animal from American BBQ. Jerk-spiced chicken, ribs, and pork slow-cooked over charcoal and wood — heavy on allspice, scotch bonnet, and thyme. Found at roadside stands and beach shacks. Follow the smoke.</div>
+              <div class="guide-tags"><span class="tag tag-coral">Roadside</span><span class="tag tag-sand">Lunch & Dinner</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--gold-light)">
+              <div class="guide-emoji">🫓</div>
+              <div class="guide-badge tag-gold">Street Food</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Roti</div>
+              <div class="guide-desc">Trinidadian influence runs deep in the USVI. Roti is a thin, flaky flatbread stuffed with curried chickpeas, potatoes, goat, or chicken — wrapped like a burrito. Quick, filling, and delicious. Common at local lunch spots and food trucks.</div>
+              <div class="guide-tags"><span class="tag tag-gold">Trinidadian</span><span class="tag tag-sand">Lunch</span><span class="tag tag-blue">Street Food</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--palm-light)">
+              <div class="guide-emoji">🥟</div>
+              <div class="guide-badge tag-green">USVI Snack</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Pates (Pattes)</div>
+              <div class="guide-desc">The Caribbean empanada. Deep-fried dough pockets stuffed with seasoned beef, fish, conch, or saltfish. Crispy outside, savory inside. Sold at bakeries and roadside stands everywhere. Grab a few for breakfast or a beach snack.</div>
+              <div class="guide-tags"><span class="tag tag-green">Fried Dough</span><span class="tag tag-sand">Snack / Breakfast</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--ocean-pale)">
+              <div class="guide-emoji">🍞</div>
+              <div class="guide-badge tag-blue">Bakery Staple</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Johnny Cake & Dumb Bread</div>
+              <div class="guide-desc">Two local bread staples. Johnny cake is a fried, slightly sweet dough — fluffy inside, golden outside. Dumb bread (also called coco bread) is denser, baked, and often used to sandwich saltfish or meat. Both are bakery staples perfect for breakfast.</div>
+              <div class="guide-tags"><span class="tag tag-blue">Baked Goods</span><span class="tag tag-sand">Breakfast</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--coral-light)">
+              <div class="guide-emoji">🍗</div>
+              <div class="guide-badge tag-coral">Comfort Food</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Brown Stew Chicken</div>
+              <div class="guide-desc">A Caribbean comfort food classic. Chicken slow-braised in a rich, dark sauce of caramelized sugar, scotch bonnet, allspice, and herbs until fall-off-the-bone tender. Served with rice and peas and fried plantains. Deeply satisfying.</div>
+              <div class="guide-tags"><span class="tag tag-coral">Comfort</span><span class="tag tag-sand">Dinner</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--palm-light)">
+              <div class="guide-emoji">🦴</div>
+              <div class="guide-badge tag-green">Sunday Special</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Oxtail</div>
+              <div class="guide-desc">One of the most beloved dishes in Caribbean cooking. Braised low-and-slow until the meat falls off the bone and the collagen creates an incredibly rich, thick gravy. Served with rice, plantains, and festival bread. Weekend staple at local spots.</div>
+              <div class="guide-tags"><span class="tag tag-green">Weekend Dish</span><span class="tag tag-sand">Lunch & Dinner</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--gold-light)">
+              <div class="guide-emoji">🧊</div>
+              <div class="guide-badge tag-gold">Beach Treat</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Fracos (Caribbean Snowcones)</div>
+              <div class="guide-desc">The Caribbean answer to a snowcone — shaved ice drenched in intensely sweet, tropical fruit syrups: tamarind, passion fruit, mango, guava. Often topped with sweetened condensed milk. Found at roadside carts and beach vendors. A must on a hot day.</div>
+              <div class="guide-tags"><span class="tag tag-gold">Beach Vendor</span><span class="tag tag-sand">Snack</span><span class="tag tag-blue">Sweet</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--ocean-pale)">
+              <div class="guide-emoji">🦐</div>
+              <div class="guide-badge tag-blue">Coastal Classic</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Conch Fritters & Stewed Conch</div>
+              <div class="guide-desc">Conch is everywhere in the USVI. Fritters are deep-fried bites of minced conch with peppers and spices — the perfect bar snack. Stewed conch is slow-cooked in a rich tomato and herb sauce. Both are quintessential island eating.</div>
+              <div class="guide-tags"><span class="tag tag-blue">Seafood</span><span class="tag tag-sand">Appetizer</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--gold-light)">
+              <div class="guide-emoji">🥭</div>
+              <div class="guide-badge tag-gold">Peak Season</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Mango & Tropical Fruits</div>
+              <div class="guide-desc">June is peak mango season in the USVI — we might just get lucky and find a mango tree somewhere on island (Sidh has two at home, though the old trees may not be fruiting anymore). Beyond mangoes, keep an eye out for soursop, tamarind, guava, passion fruit, starfruit, and sugar apple at local markets and roadside stands.</div>
+              <div class="guide-tags"><span class="tag tag-gold">Peak Season June</span><span class="tag tag-sand">Fresh & Local</span><span class="tag tag-green">Mango Hunt 🔍</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--palm-light)">
+              <div class="guide-emoji">🥥</div>
+              <div class="guide-badge tag-green">Island Fresh</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Fresh Coconut</div>
+              <div class="guide-desc">Nothing beats a young coconut cracked open on a hot beach day — sweet water, soft jelly inside. Found at roadside stands and beach vendors across the island. Sidh's home even has a coconut tree, though it's old enough that fruiting is a coin flip at this point.</div>
+              <div class="guide-tags"><span class="tag tag-green">Beach Staple</span><span class="tag tag-sand">Refreshing</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--coral-light)">
+              <div class="guide-emoji">🍹</div>
+              <div class="guide-badge tag-coral">Drink Up</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">The Painkiller & Bushwacker</div>
+              <div class="guide-desc">Two signature USVI cocktails. The Painkiller: rum, coconut cream, pineapple and OJ, dusted with nutmeg — invented at the Soggy Dollar Bar in BVI. The Bushwacker: a frozen chocolate-coconut-rum milkshake that'll sneak up on you. Order both.</div>
+              <div class="guide-tags"><span class="tag tag-coral">USVI Originals</span><span class="tag tag-sand">Drinks</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tip-box" style="margin-top:16px">
+          💡 <strong>Local tip from Sidh:</strong> Skip the tourist-facing spots near the cruise ship docks for lunch. Look for local spots a block or two off the main drag, or follow the smell of a roadside BBQ grill. That's where the real food is.
+        </div>
+      </div>
+
+      <!-- VIRGIN GORDA FOOD -->
+      <div id="food-vg" class="itin-panel">
+        <div class="guide-grid">
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--gold-light)">
+              <div class="guide-emoji">🏔️</div>
+              <div class="guide-badge tag-gold">After The Baths</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Top of the Baths Restaurant</div>
+              <div class="guide-desc">The natural stop after exploring the caves — panoramic views, Caribbean dishes, rum cocktails, and a pool. Order the jerk chicken, stewed fish, or fungi with whatever protein they're serving that day.</div>
+              <div class="guide-tags"><span class="tag tag-gold">Panoramic Views</span><span class="tag tag-sand">Lunch</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--ocean-pale)">
+              <div class="guide-emoji">🍺</div>
+              <div class="guide-badge tag-blue">Beach Bar</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Poorman's Bar at the Baths</div>
+              <div class="guide-desc">Right at the beach entrance. Cold Caribs (local beer), rum punches, and local snacks. Jump in the pool after your cave walk. Simple, cold, perfect.</div>
+              <div class="guide-tags"><span class="tag tag-blue">Beach Bar</span><span class="tag tag-sand">Snacks & Drinks</span></div>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-top" style="background:var(--palm-light)">
+              <div class="guide-emoji">🍗</div>
+              <div class="guide-badge tag-green">Local Plate</div>
+            </div>
+            <div class="guide-card-body">
+              <div class="guide-name">Local Plate Lunch</div>
+              <div class="guide-desc">Look for any local lunch counter in Spanish Town — oxtail, brown stew chicken, fungi, rice and peas, and fried plantains. The same dishes you love on St. Thomas, same quality, way fewer tourists around you.</div>
+              <div class="guide-tags"><span class="tag tag-green">Authentic</span><span class="tag tag-sand">Lunch</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tip-box" style="margin-top:16px">
+          💡 Virgin Gorda is a day trip — eat a big breakfast on St. Thomas before you leave. Food options at the Baths are limited, and you'll be spending most of your time in the water anyway.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEACHES -->
+<section id="beaches">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Sun & Sand</div>
+      <h2 class="section-title">Best Beaches</h2>
+      <p class="section-sub">Every beach has a personality. Here's where to go depending on what you're looking for.</p>
+    </div>
+    <div class="reveal">
+      <div class="itinerary-tabs">
+        <button class="itin-tab active" onclick="switchTab3('beach-stt', this)">St. Thomas</button>
+        <button class="itin-tab" onclick="switchTab3('beach-stj', this)">St. John</button>
+        <button class="itin-tab" onclick="switchTab3('beach-vg', this)">Virgin Gorda</button>
+      </div>
+
+      <!-- ST THOMAS BEACHES -->
+      <div id="beach-stt" class="itin-panel active">
+        <div class="beach-list">
+          <div class="beach-item reveal">
+            <div class="beach-rank">1</div>
+            <div class="beach-info">
+              <div class="beach-name">Magens Bay <span class="beach-pill tag-blue">The Classic</span></div>
+              <div class="beach-desc">A mile of perfect crescent sand backed by green hills — the island's most iconic beach. Calm, shallow water ideal for swimming. Entry fee ~$4/person. Gets busy with cruise crowds — go early (before 10am) or in the afternoon.</div>
+              <div class="beach-meta">🏊 Swimming · 🤿 Some snorkeling · 🍹 Beach bar · 🚗 Drive or taxi</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">2</div>
+            <div class="beach-info">
+              <div class="beach-name">Lindquist Beach (Smith Bay) <span class="beach-pill tag-green">Hidden Gem</span></div>
+              <div class="beach-desc">Arguably the most beautiful beach on the island and a local secret. No cruise ship stop. Crystal clear water in every shade of blue, pristine and quiet. Small entry fee on weekends. No vendors or loud music.</div>
+              <div class="beach-meta">🏊 Swimming · 🤿 Excellent snorkeling · 🌿 Protected park · 🚗 Drive or taxi</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">3</div>
+            <div class="beach-info">
+              <div class="beach-name">Sapphire Beach <span class="beach-pill tag-blue">Best Snorkeling</span></div>
+              <div class="beach-desc">East End gem with some of the best shore snorkeling on the island. Wide, safe beach with water sports galore — kayaking, windsurfing, jet skiing, parasailing. Beachside restaurant and bar on site.</div>
+              <div class="beach-meta">🤿 Excellent snorkeling · 🚤 Water sports · 🍹 Bar & restaurant · 🚗 East End</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">4</div>
+            <div class="beach-info">
+              <div class="beach-name">Coki Beach <span class="beach-pill tag-coral">Most Lively</span></div>
+              <div class="beach-desc">Next to Coral World Ocean Park — snorkeling and diving right off the beach. Lively atmosphere with vendors, chair rentals, and a reggae vibe. Great for people who want action. Watch your valuables.</div>
+              <div class="beach-meta">🤿 Excellent snorkeling · 🎵 Lively vibe · 🦈 Dive shop on site · 🚗 Drive or taxi</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">5</div>
+            <div class="beach-info">
+              <div class="beach-name">Hull Bay <span class="beach-pill tag-green">Local Vibe</span></div>
+              <div class="beach-desc">Hidden on the north shore, harder to find, worth the effort. Surfers come for the west end waves; calmer waters on the east end. Fish Bar is right here. Very local feel — no cruise ship crowds ever.</div>
+              <div class="beach-meta">🏄 Surfing (west) · 🏊 Calm swimming (east) · 🍹 Fish Bar · 🚗 North Shore</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ST JOHN BEACHES -->
+      <div id="beach-stj" class="itin-panel">
+        <div class="beach-list">
+          <div class="beach-item reveal">
+            <div class="beach-rank">1</div>
+            <div class="beach-info">
+              <div class="beach-name">Trunk Bay <span class="beach-pill tag-blue">World Famous</span></div>
+              <div class="beach-desc">Consistently ranked one of the best beaches in the Caribbean. National Park beach with an underwater snorkeling trail. Stunning turquoise water, soft white sand, dramatic tree-lined shore. Go early — it fills up. Entry ~$5.</div>
+              <div class="beach-meta">🤿 Snorkel trail · 🏊 Swimming · 🌿 National Park · 🚌 Taxi or drive</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">2</div>
+            <div class="beach-info">
+              <div class="beach-name">Maho Bay <span class="beach-pill tag-green">See Sea Turtles</span></div>
+              <div class="beach-desc">Best beach on the island to swim with sea turtles — they graze in the seagrass right off the beach. Calm, shallow water. Food trucks across the street. Beautiful and relatively easy to access.</div>
+              <div class="beach-meta">🐢 Sea turtles · 🏊 Calm swimming · 🌮 Food trucks nearby · 🚗 20 min from Cruz Bay</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">3</div>
+            <div class="beach-info">
+              <div class="beach-name">Cinnamon Bay <span class="beach-pill tag-blue">Longest Beach</span></div>
+              <div class="beach-desc">The longest beach on St. John — great for water sports, picnics, and exploring. National Park campground here. Windier than other beaches so good for windsurfing and sailing. Spacious and less crowded than Trunk.</div>
+              <div class="beach-meta">🏄 Water sports · 🏕️ Campground · 🌿 National Park · 🚗 North Shore Road</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">4</div>
+            <div class="beach-info">
+              <div class="beach-name">Honeymoon Beach <span class="beach-pill tag-coral">Best Amenities</span></div>
+              <div class="beach-desc">Powdery white sand accessible via a beautiful hike along the Lind Point Trail, or by water taxi. Chair and snorkel rentals, kayaks, paddleboards. Bikinis on the Beach bar serves frozen drinks and tacos.</div>
+              <div class="beach-meta">🥾 Hike-in or water taxi · 🛶 Kayak rentals · 🍹 Beach bar · 🤿 Snorkeling</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">5</div>
+            <div class="beach-info">
+              <div class="beach-name">Hawksnest Bay <span class="beach-pill tag-green">Local Spot</span></div>
+              <div class="beach-desc">Just 7 minutes from Cruz Bay but feels a world away. Locals' favorite — narrow beach, less crowded, beautiful water. Great for snorkeling along the rocky outcrops. Easy parking, no crowds.</div>
+              <div class="beach-meta">🤿 Snorkeling · 🏊 Swimming · 🧘 Relaxed vibe · 🚗 7 min from Cruz Bay</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIRGIN GORDA BEACHES -->
+      <div id="beach-vg" class="itin-panel">
+        <div class="beach-list">
+          <div class="beach-item reveal">
+            <div class="beach-rank">1</div>
+            <div class="beach-info">
+              <div class="beach-name">The Baths / Devil's Bay <span class="beach-pill tag-coral">Bucket List</span></div>
+              <div class="beach-desc">The whole reason you'd go to Virgin Gorda. Massive granite boulders form caves, grottos, and tidal pools. The trail through the rocks leads to secluded Devil's Bay beach. Otherworldly. Entry $3/person. Go before 8am or after 4pm to avoid crowds.</div>
+              <div class="beach-meta">🪨 Boulder caves · 🤿 Snorkeling · 🥾 Trail through grottos · ⛵ Boat access</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">2</div>
+            <div class="beach-info">
+              <div class="beach-name">Spring Bay <span class="beach-pill tag-blue">Hidden & Calm</span></div>
+              <div class="beach-desc">Just above The Baths in an area called The Crawl. Secluded rock pool swimming, picnic tables, barbecue grills, and kids' swings. Rarely crowded. Accessible by land or sea. A more peaceful alternative to the Baths chaos.</div>
+              <div class="beach-meta">🏊 Calm swimming · 🌿 Uncrowded · 🏕️ Picnic area · 📍 Near The Baths</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">3</div>
+            <div class="beach-info">
+              <div class="beach-name">Savannah Bay <span class="beach-pill tag-green">Untouched</span></div>
+              <div class="beach-desc">Long, undeveloped, wild beach — no vendors, no music, no shade structures. Just open space, turquoise sea, and total serenity. One of the most naturally beautiful beaches in the BVI. Bring your own water and snacks.</div>
+              <div class="beach-meta">🏝️ Undeveloped · 🌊 Open ocean · 🧘 Very quiet · 🚗 North of Spanish Town</div>
+            </div>
+          </div>
+          <div class="beach-item reveal">
+            <div class="beach-rank">4</div>
+            <div class="beach-info">
+              <div class="beach-name">Little Trunk Bay <span class="beach-pill tag-gold">Secret Gem</span></div>
+              <div class="beach-desc">Hidden gem just a 3-minute drive from Devil's Bay that almost no one visits. Pale sand, calm water, excellent snorkeling around the rocks at both ends. When the sea is flat, visibility is incredible.</div>
+              <div class="beach-meta">🤿 Incredible snorkeling · 🏝️ Secluded · 📍 Near The Baths · 🚗 Short drive</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOP ATTRACTIONS -->
+<section id="attractions">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Beyond the Beach</div>
+      <h2 class="section-title">Top Attractions</h2>
+      <p class="section-sub">The must-do experiences on each island beyond just laying on the sand.</p>
+    </div>
+    <div class="reveal">
+      <div class="itinerary-tabs">
+        <button class="itin-tab active" onclick="switchTab4('attr-stt', this)">St. Thomas</button>
+        <button class="itin-tab" onclick="switchTab4('attr-stj', this)">St. John</button>
+        <button class="itin-tab" onclick="switchTab4('attr-vg', this)">Virgin Gorda</button>
+      </div>
+
+      <!-- ST THOMAS ATTRACTIONS -->
+      <div id="attr-stt" class="itin-panel active">
+        <div class="attr-grid">
+          <div class="attr-card reveal">
+            <div class="attr-icon">🛍️</div>
+            <div class="attr-title">Shopping: Main Street, Havensight & Yacht Haven Grande</div>
+            <div class="attr-desc">Three distinct shopping zones. Main Street in Charlotte Amalie is the classic duty-free strip — jewelry, spirits, and designer goods at up to 50% off US prices. Havensight is right at the cruise dock, more commercial but convenient. Yacht Haven Grande is upscale marina shopping — Gucci, Bulgari, Louis Vuitton — set along a beautiful waterfront promenade.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">⛪</div>
+            <div class="attr-title">All Saints Cathedral & School</div>
+            <div class="attr-desc">One of St. Thomas's most historic landmarks — and Sidh's alma mater. The cathedral dates back to the 1840s, built in Gothic style with stunning stained glass. The school grounds are beautiful and the campus sits right in the heart of Charlotte Amalie. A piece of real island history.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🏡</div>
+            <div class="attr-title">Plantation Manor — Sidh's Home</div>
+            <div class="attr-desc">Where Sidh grew up — a beautiful manor tucked into the hills of St. Thomas with lush tropical grounds. On the property: two mango trees and a coconut tree, all old enough that they may or may not be fruiting by June. A personal stop on the tour and a genuine piece of island life beyond the tourist trail.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🏔️</div>
+            <div class="attr-title">Mountain Top</div>
+            <div class="attr-desc">The highest point accessible by road on St. Thomas, at nearly 1,600 feet. The panoramic views are absolutely breathtaking — on a clear day you can see St. John, the BVI, and beyond. Mountain Top also claims to have invented the Banana Daiquiri. Stay for a drink and the view.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">📸</div>
+            <div class="attr-title">Drake's Seat Viewpoint</div>
+            <div class="attr-desc">Legendary panoramic lookout where Sir Francis Drake supposedly surveyed shipping routes. Best in the morning for photos before the haze sets in. One of the most photographed spots on the island — free, quick, and unmissable.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🏖️</div>
+            <div class="attr-title">Magens Bay</div>
+            <div class="attr-desc">The most iconic beach on St. Thomas — a mile-long crescent of white sand backed by green hills, consistently ranked among the best beaches in the Caribbean. Calm, shallow water perfect for swimming. Go early (before 10am) to beat the cruise ship crowds. Entry ~$4/person. Beach bar, chair rentals, and kayaks on site.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🐠</div>
+            <div class="attr-title">Coral World Ocean Park</div>
+            <div class="attr-desc">A unique marine observatory built right on the reef at Coki Beach. See sea turtles, sharks, stingrays, and Caribbean reef fish up close without getting wet. Sea Trek helmet dive lets you walk on the ocean floor. Snorkeling tours, touch tanks, and a living coral exhibit. Great half-day activity for the group.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ST JOHN ATTRACTIONS -->
+      <div id="attr-stj" class="itin-panel">
+        <div class="attr-grid">
+          <div class="attr-card reveal">
+            <div class="attr-icon">🌿</div>
+            <div class="attr-title">Virgin Islands National Park</div>
+            <div class="attr-desc">~60% of St. John is protected national park. Miles of hiking trails through lush forest, historic ruins, and stunning overlooks. The Reef Bay Trail is the crown jewel — leads to ancient petroglyphs and sugar mill ruins.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🐢</div>
+            <div class="attr-title">Snorkeling at Maho Bay</div>
+            <div class="attr-desc">The best spot in the USVI to swim with green sea turtles in the wild. They come right up to you. Show up around 7–9am for the best turtle action before the crowd arrives. Completely free, no equipment needed beyond a mask.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🏛️</div>
+            <div class="attr-title">Annaberg Plantation Ruins</div>
+            <div class="attr-desc">Well-preserved 18th-century sugar plantation ruins on the north shore. Self-guided tour through the mill, factory, and slave quarters. Haunting and beautiful. Sweeping views of the BVI from the ruins. Free to visit.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🛍️</div>
+            <div class="attr-title">Mongoose Junction Shopping</div>
+            <div class="attr-desc">Charming open-air shopping center in Cruz Bay built with beautiful stone architecture and lush greenery. Local art galleries, boutiques, jewelry, and St. John Scoops ice cream. Feels like Swiss Family Robinson. Must-walk.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🥾</div>
+            <div class="attr-title">Ram Head Trail Hike</div>
+            <div class="attr-desc">Moderate 2-mile round trip out to the dramatic Ram Head peninsula with spectacular 270° coastal views and a pebble beach below the cliffs. One of the most rewarding hikes in the USVI. Go in the morning before the heat.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🍹</div>
+            <div class="attr-title">Cruz Bay Beach Bar Scene</div>
+            <div class="attr-desc">Cruz Bay has a compact, walkable beach town scene. Beach Bar, High Tide, and Joe's Rum Hut are all within a short walk. Bushwackers, Painkillers, live music, and the ferry parade in and out. Great first and last stop on the island.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIRGIN GORDA ATTRACTIONS -->
+      <div id="attr-vg" class="itin-panel">
+        <div class="attr-grid">
+          <div class="attr-card reveal">
+            <div class="attr-icon">🪨</div>
+            <div class="attr-title">The Baths National Park</div>
+            <div class="attr-desc">The undisputed #1 attraction in the BVI. Giant granite boulders forming caves, grottos, and tidal pools. Hike the 1.1km loop through The Caves to Devil's Bay beach. Entry $3/person. Slippery rocks — wear swim shoes.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🏗️</div>
+            <div class="attr-title">Copper Mine Ruins</div>
+            <div class="attr-desc">Historic 19th-century copper mine ruins perched dramatically on sea cliffs at the island's southeastern tip. Abandoned in 1862, the stone ruins against the crashing Atlantic surf make for incredible photos. Free to visit.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🌋</div>
+            <div class="attr-title">Gorda Peak Hike</div>
+            <div class="attr-desc">Hike to the island's highest point for panoramic views across the BVI chain. The trail winds through one of the last remaining Caribbean dry forests — home to the world's smallest lizard, the Virgin Gorda gecko.</div>
+          </div>
+          <div class="attr-card reveal">
+            <div class="attr-icon">🤿</div>
+            <div class="attr-title">Snorkeling at The Baths</div>
+            <div class="attr-desc">Snorkel within the national park's buoy line around the boulders. Vibrant marine life, healthy coral, and incredible visibility. The tidal pools inside The Caves are otherworldly. Bring your own gear or rent nearby.</div>
+          </div>
+        </div>
+        <div class="tip-box" style="margin-top:16px">
+          💡 <strong>Virgin Gorda is a day-trip island for us.</strong> The Baths + snorkeling + a lunch stop at Top of the Baths is a full and perfect day. Don't try to cram in too many things — the Baths themselves deserve 2–3 hours.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <strong>St. Thomas 2026</strong> · June 18–21 · US Virgin Islands<br>
@@ -998,6 +1578,35 @@
   function switchTab(id, btn) {
     document.querySelectorAll('.itin-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.itin-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function makeTabSwitcher(ids, btnClass) {
+    return function(id, btn) {
+      ids.forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
+      btn.closest('.reveal, section, div').querySelectorAll('.itin-tab').forEach(b => b.classList.remove('active'));
+      const target = document.getElementById(id);
+      if(target) target.classList.add('active');
+      btn.classList.add('active');
+    };
+  }
+
+  function switchTab2(id, btn) {
+    ['food-stt','food-vg'].forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
+    btn.closest('div').querySelectorAll('.itin-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function switchTab3(id, btn) {
+    ['beach-stt','beach-stj','beach-vg'].forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
+    btn.closest('div').querySelectorAll('.itin-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function switchTab4(id, btn) {
+    ['attr-stt','attr-stj','attr-vg'].forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
+    btn.closest('div').querySelectorAll('.itin-tab').forEach(b => b.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     btn.classList.add('active');
   }
