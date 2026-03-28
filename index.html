@@ -1067,7 +1067,7 @@
     </div>
     <div class="charter-wrapper reveal">
       <div class="charter-q">Do we charter a private boat for Day 3?</div>
-      <div class="charter-price">⚓ ~$100–200 per person · Full day on the water</div>
+      <div class="charter-price">⚓ ~$150–300 per person · Full day on the water (incl. customs fees)</div>
       <div class="charter-grid">
         <div class="pro-box" style="background:var(--palm-light);border:1px solid rgba(45,106,79,0.15)">
           <div class="pc-head pro">Yes — Charter it</div>
@@ -1081,7 +1081,7 @@
         </div>
         <div class="con-box" style="background:var(--coral-light);border:1px solid rgba(232,112,74,0.15)">
           <div class="pc-head con">No — Skip It</div>
-          <div class="pc-item con">$100–200/pp is a real cost for a group</div>
+          <div class="pc-item con">$150–300/pp is a real cost (includes customs fees)</div>
           <div class="pc-item con">St. John ferry is totally doable on its own</div>
           <div class="pc-item con">Less flexibility if weather changes plans</div>
         </div>
@@ -1136,7 +1136,7 @@
       <div class="budget-card">
         <div class="budget-icon">⚓</div>
         <div class="budget-label">Charter Boat</div>
-        <div class="budget-value">$100–200</div>
+        <div class="budget-value">$150–300</div>
         <div class="budget-per">per person (if yes)</div>
       </div>
       <div class="budget-card">
@@ -1164,7 +1164,7 @@
       <label class="calc-toggle">
         <input type="checkbox" id="charter-toggle" onchange="recalc()">
         <span class="calc-toggle-label">⚓ Include private charter boat (Day 3)</span>
-        <span class="calc-toggle-price">+$100–200/pp</span>
+        <span class="calc-toggle-price">+$150–300/pp (incl. customs)</span>
       </label>
 
       <div class="calc-rows">
@@ -1205,8 +1205,8 @@
         </div>
         <div class="calc-row calc-row-optional" id="charter-row">
           <div class="calc-row-name">⚓ Charter boat <span style="font-size:11px;color:var(--ocean);font-weight:500">(optional)</span></div>
-          <div class="calc-row-math">$100–200/pp</div>
-          <div class="calc-row-val">$100–200</div>
+          <div class="calc-row-math">$150–300/pp</div>
+          <div class="calc-row-val">$150–300</div>
         </div>
       </div>
 
@@ -1768,9 +1768,9 @@
     var subEl = document.getElementById('total-sub');
     row.classList.toggle('active', withCharter);
     // flights(250) + hotel(450) + lunch(60-100) + dinner(75-90) + car(100) + gas(15) + ferry(15-20) = 965-1025
-    // + charter(100-200) = 1065-1225
+    // + charter(150-300) = 1115-1325
     if (withCharter) {
-      totalEl.textContent = '$1,065–1,225';
+      totalEl.textContent = '$1,115–1,325';
       subEl.textContent = 'Including charter · flights + hotel + food + car + ferry + boat';
     } else {
       totalEl.textContent = '$965–1,025';
