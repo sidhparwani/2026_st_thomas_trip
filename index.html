@@ -580,7 +580,183 @@
     section { padding: 52px 0; }
   }
 
-  /* ── COMPARE GRID (side-by-side itinerary) ── */
+  /* ── FULL DAY BLOCKS (itinerary) ── */
+  .day-full-block {
+    display: flex;
+    gap: 20px;
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(42,126,166,0.1);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 16px rgba(26,84,114,0.05);
+    align-items: flex-start;
+  }
+  .day-full-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .day-full-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ocean-light);
+    line-height: 1;
+  }
+  .day-full-date {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    max-width: 60px;
+  }
+  .day-full-content { flex: 1; }
+  .day-full-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .day-full-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .day-full-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── DAY 3 SIDE-BY-SIDE ── */
+  .day3-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 640px) { .day3-grid { grid-template-columns: 1fr; } }
+  .day3-option {
+    border-radius: var(--radius);
+    border: 2px solid transparent;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(26,84,114,0.06);
+  }
+  .day3-charter { border-color: var(--ocean-light); }
+  .day3-ferry   { border-color: var(--palm); }
+  .day3-option-head {
+    padding: 16px 18px 14px;
+  }
+  .day3-charter .day3-option-head { background: var(--ocean-pale); }
+  .day3-ferry   .day3-option-head { background: var(--palm-light); }
+  .day3-badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .day3-charter .day3-badge { color: var(--ocean-deep); }
+  .day3-ferry   .day3-badge { color: var(--palm); }
+  .day3-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .day3-price {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .day3-body {
+    background: var(--white);
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .day3-tags {
+    background: var(--white);
+    padding: 0 18px 14px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  /* ── AIRBNB BLOCK ── */
+  .airbnb-block {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(42,126,166,0.12);
+    overflow: hidden;
+    margin-top: 16px;
+    box-shadow: 0 2px 16px rgba(26,84,114,0.06);
+  }
+  .airbnb-inner {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+  }
+  @media (max-width: 600px) { .airbnb-inner { flex-direction: column; } }
+  .airbnb-left {
+    flex: 1.5;
+    padding: 1.5rem 1.75rem;
+    border-right: 1px solid rgba(42,126,166,0.1);
+  }
+  @media (max-width: 600px) { .airbnb-left { border-right: none; border-bottom: 1px solid rgba(42,126,166,0.1); } }
+  .airbnb-right {
+    flex: 1;
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+  }
+  .airbnb-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ocean);
+    margin-bottom: 6px;
+  }
+  .airbnb-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .airbnb-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .airbnb-btn {
+    display: inline-block;
+    background: #FF5A5F;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .airbnb-btn:hover { opacity: 0.88; }
+  .airbnb-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .airbnb-detail span:first-child { font-size: 16px; flex-shrink: 0; }
+
+  /* ── COMPARE GRID ── */
   .compare-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -768,6 +944,16 @@
 
   <div class="countdown" id="countdown">
     <div class="countdown-unit">
+      <div class="countdown-num" id="cd-months">—</div>
+      <div class="countdown-label">Months</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <div class="countdown-num" id="cd-weeks">—</div>
+      <div class="countdown-label">Weeks</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
       <div class="countdown-num" id="cd-days">—</div>
       <div class="countdown-label">Days</div>
     </div>
@@ -874,7 +1060,7 @@
     <div class="reveal">
       <div class="section-eyebrow">Where We're Going</div>
       <h2 class="section-title">The Islands</h2>
-      <p class="section-sub">St. Thomas is our home base. St. John is 20 minutes away by ferry. Virgin Gorda (BVI) is farther east — a longer boat ride but home to The Baths.</p>
+      <p class="section-sub">St. Thomas is our home base. St. John is 20 minutes away by ferry — our island-hopping destination on Day 3.</p>
     </div>
     <div class="map-container reveal" style="height:420px;position:relative;">
       <div id="satellite-map" style="width:100%;height:100%;"></div>
@@ -905,7 +1091,6 @@
 
           L.marker([18.3408,-64.9306], {icon:blueIcon}).addTo(map).bindPopup('<b>✈ St. Thomas</b><br>Your home base · Fly in Jun 18');
           L.marker([18.3321,-64.7968], {icon:greenIcon}).addTo(map).bindPopup('<b>🌿 St. John</b><br>20-min ferry from Red Hook · No passport');
-          L.marker([18.4958,-64.4335], {icon:coralIcon}).addTo(map).bindPopup('<b>🪨 Virgin Gorda (BVI)</b><br>The Baths · Passport required · ~1.5hr by boat');
 
           [
             [[18.3926,-64.9556],'🏖️ Magens Bay','Best classic beach on St. Thomas'],
@@ -914,7 +1099,6 @@
             [[18.3695,-64.8455],'🏄 Hull Bay','Local vibe + Fish Bar'],
             [[18.3535,-64.7459],'🌊 Trunk Bay','World-famous · St. John national park'],
             [[18.3604,-64.7237],'🐢 Maho Bay','Swim with sea turtles'],
-            [[18.4473,-64.4494],'🪨 The Baths','Bucket-list boulder grottos · Virgin Gorda'],
           ].forEach(function(b) {
             L.marker(b[0], {icon:starIcon}).addTo(map).bindPopup('<b>'+b[1]+'</b><br>'+b[2]);
           });
@@ -934,14 +1118,7 @@
         <div class="island-icon island-icon-green">🌿</div>
         <div>
           <div class="island-name">St. John (USVI)</div>
-          <div class="island-desc">20-min ferry from Red Hook. ~60% national park. Trunk Bay, Cinnamon Bay, Lime Out floating restaurant. No passport.</div>
-        </div>
-      </div>
-      <div class="island-card">
-        <div class="island-icon island-icon-coral">🪨</div>
-        <div>
-          <div class="island-name">Virgin Gorda (BVI)</div>
-          <div class="island-desc">The Baths: massive boulder grottos and sea caves. Longer boat ride (~1.5–2 hrs). Passport required + BVI customs.</div>
+          <div class="island-desc">20-min ferry from Red Hook. ~60% national park. Trunk Bay, Cinnamon Bay, Lime Out floating restaurant. No passport needed.</div>
         </div>
       </div>
     </div>
@@ -953,105 +1130,102 @@
   <div class="container">
     <div class="reveal">
       <div class="section-eyebrow">The Plan</div>
-      <h2 class="section-title">Itinerary Options</h2>
-      <p class="section-sub">Two solid options for island-hopping day. Here's the full side-by-side so we can actually decide.</p>
+      <h2 class="section-title">Day-by-Day Itinerary</h2>
+      <p class="section-sub">Days 1, 2, and 4 are locked in. Day 3 is the big decision — charter boat or ferry & drive.</p>
     </div>
 
-    <!-- SIDE BY SIDE HEADERS -->
-    <div class="compare-grid reveal">
-      <div class="compare-col compare-col-left">
-        <div class="compare-header" style="background:linear-gradient(135deg,#1A5472,#2A7EA6)">
-          <div class="compare-tag">Option 1</div>
-          <div class="compare-title">St. Thomas + St. John</div>
-          <div class="compare-subtitle">1.5 days STT · 1 day St. John</div>
-          <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
-            <span class="tag tag-green" style="background:rgba(255,255,255,0.2);color:#fff">No Passport</span>
-            <span class="tag tag-blue" style="background:rgba(255,255,255,0.15);color:#fff">20-min Ferry</span>
+    <!-- DAY 1 -->
+    <div class="day-full-block reveal">
+      <div class="day-full-label">
+        <span class="day-full-num">1</span>
+        <span class="day-full-date">Thursday, June 18</span>
+      </div>
+      <div class="day-full-content">
+        <div class="day-full-title">Land · Explore · Dinner with Sidh's Family</div>
+        <div class="day-full-desc">Touch down at STT around 2:30pm. Get the rental cars (Chase and Sidh driving), check in, and shake off the travel. Head downtown to explore Charlotte Amalie — duty-free shopping on Main Street, the waterfront, get oriented. End the night with dinner with Sidh's family. Best introduction to the island possible.</div>
+        <div class="day-full-tags">
+          <span class="tag tag-blue">Arrive 2:30pm STT</span>
+          <span class="tag tag-sand">Rental Cars</span>
+          <span class="tag tag-green">Dinner with Family</span>
+          <span class="tag tag-sand">Charlotte Amalie</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-full-block reveal">
+      <div class="day-full-label">
+        <span class="day-full-num">2</span>
+        <span class="day-full-date">Friday, June 19</span>
+      </div>
+      <div class="day-full-content">
+        <div class="day-full-title">Full St. Thomas Day</div>
+        <div class="day-full-desc">Drive up to Mountain Top for sunrise views and a Banana Daiquiri, then down to Magens Bay for a full beach morning — it's the best classic beach on the island. Afternoon for food, shopping on Main Street, Havensight, and Yacht Haven Grande. Explore Sidh's old stomping grounds including All Saints Cathedral School and Plantation Manor. End with dinner and drinks.</div>
+        <div class="day-full-tags">
+          <span class="tag tag-blue">Mountain Top</span>
+          <span class="tag tag-sand">Magens Bay</span>
+          <span class="tag tag-green">Shopping</span>
+          <span class="tag tag-sand">Sidh's Schools &amp; Home</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 3 — two side-by-side options -->
+    <div class="reveal">
+      <div class="compare-section-label" style="margin-top:24px">🏝️ Day 3 · Saturday, June 20 — Pick one</div>
+      <div class="day3-grid">
+        <div class="day3-option day3-charter">
+          <div class="day3-option-head">
+            <div class="day3-badge">Option A</div>
+            <div class="day3-title">Private Charter Boat</div>
+            <div class="day3-price">~$100–200/pp</div>
+          </div>
+          <div class="day3-body">
+            Depart by boat from St. Thomas in the morning. Sail to St. John, stop at Honeymoon Beach, cruise to Lime Out floating taco bar for lunch, snorkel at Trunk Bay, open water swimming between stops. Private boat — just our crew, our schedule, captain handles everything. Chase is researching charters now — <strong>plan to book by April 19th</strong> (60 days out).
+          </div>
+          <div class="day3-tags">
+            <span class="tag tag-blue">Private Boat</span>
+            <span class="tag tag-sand">Lime Out</span>
+            <span class="tag tag-green">Open Water Swim</span>
+            <span class="tag tag-sand">Trunk Bay</span>
+          </div>
+        </div>
+        <div class="day3-option day3-ferry">
+          <div class="day3-option-head">
+            <div class="day3-badge" style="background:rgba(45,106,79,0.15);color:var(--palm)">Option B</div>
+            <div class="day3-title">Cars + Ferry to St. John</div>
+            <div class="day3-price">~$15–20/pp ferry</div>
+          </div>
+          <div class="day3-body">
+            Drive rental cars onto the Red Hook ferry and cross to St. John (~20 min). Drive to Trunk Bay for snorkeling on the national park's famous underwater trail. Grab lunch, then take a water taxi out to Lime Out floating taco bar ($30/pp). Explore the island, drive back to the ferry, and cross home before sunset.
+          </div>
+          <div class="day3-tags">
+            <span class="tag tag-green">Rental Cars</span>
+            <span class="tag tag-sand">Red Hook Ferry</span>
+            <span class="tag tag-blue">Trunk Bay</span>
+            <span class="tag tag-sand">Lime Out</span>
           </div>
         </div>
       </div>
-      <div class="compare-col compare-col-right">
-        <div class="compare-header" style="background:linear-gradient(135deg,#7A3B1E,#E8704A)">
-          <div class="compare-tag">Option 2</div>
-          <div class="compare-title">St. Thomas + Virgin Gorda</div>
-          <div class="compare-subtitle">1.5 days STT · 1 day The Baths (BVI)</div>
-          <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
-            <span class="tag" style="background:rgba(255,255,255,0.2);color:#fff">Passport Required</span>
-            <span class="tag" style="background:rgba(255,255,255,0.15);color:#fff">Bucket List</span>
-          </div>
-        </div>
+      <div class="tip-box" style="margin-top:12px">
+        📅 <strong>Book by April 19th</strong> — that's 60 days before departure. Chase is on charter research. If we go Option A, we lock it in then. Ferry + cars (Option B) needs no advance booking.
       </div>
     </div>
 
-    <!-- ITINERARY SIDE BY SIDE -->
-    <div class="compare-section-label reveal">📅 Day-by-Day</div>
-    <div class="compare-grid reveal">
-      <div class="compare-col">
-        <div class="day-block"><div class="day-label">Day 1 · Thu PM</div><div class="day-content">Arrive STT · Check in · Explore Charlotte Amalie · Sunset drinks</div></div>
-        <div class="day-block" style="margin-top:8px"><div class="day-label">Day 2 · Friday</div><div class="day-content">St. Thomas — Magens Bay, Coki Beach, food, shopping</div></div>
-        <div class="day-block" style="margin-top:8px;border-left:3px solid var(--ocean)"><div class="day-label">Day 3 · Saturday ✦</div><div class="day-content">Ferry to St. John — Trunk Bay, Lime Out floating bar, hike, snorkel</div></div>
-        <div class="day-block" style="margin-top:8px"><div class="day-label">Day 4 · Sun</div><div class="day-content">Morning swim or brunch · Head to airport · Fly home ~4pm</div></div>
+    <!-- DAY 4 -->
+    <div class="day-full-block reveal">
+      <div class="day-full-label">
+        <span class="day-full-num">4</span>
+        <span class="day-full-date">Sunday, June 21</span>
       </div>
-      <div class="compare-col">
-        <div class="day-block"><div class="day-label">Day 1 · Thu PM</div><div class="day-content">Arrive STT · Check in · Explore Charlotte Amalie · Sunset drinks</div></div>
-        <div class="day-block" style="margin-top:8px"><div class="day-label">Day 2 · Friday</div><div class="day-content">St. Thomas — Magens Bay, Coki Beach, food, shopping</div></div>
-        <div class="day-block" style="margin-top:8px;border-left:3px solid var(--coral)"><div class="day-label">Day 3 · Saturday ✦</div><div class="day-content">Charter to Virgin Gorda — The Baths caves, grottos, snorkel, swim</div></div>
-        <div class="day-block" style="margin-top:8px"><div class="day-label">Day 4 · Sun</div><div class="day-content">Morning swim or brunch · Head to airport · Fly home ~4pm</div></div>
-      </div>
-    </div>
-
-    <!-- PROS SIDE BY SIDE -->
-    <div class="compare-section-label reveal">✓ Pros</div>
-    <div class="compare-grid reveal">
-      <div class="compare-col">
-        <div class="pro-box" style="height:100%">
-          <div class="pc-item pro">No passport required — fully in US territory</div>
-          <div class="pc-item pro">Easy 20-min ferry from Red Hook</div>
-          <div class="pc-item pro">Rental car goes right onto the ferry with you</div>
-          <div class="pc-item pro">Trunk Bay — consistently one of the world's best beaches</div>
-          <div class="pc-item pro">Lime Out floating taco bar (unique experience)</div>
-          <div class="pc-item pro">Less logistics, more flexibility on the day</div>
-          <div class="pc-item pro">Ferry only $15–20/pp round trip</div>
+      <div class="day-full-content">
+        <div class="day-full-title">Morning Swim · Brunch · Fly Home</div>
+        <div class="day-full-desc">Easy morning — one last swim or a slow brunch. Return the rental cars. Flight departs STT at 3:25pm, lands MCO at 6:40pm. Back home by dinner.</div>
+        <div class="day-full-tags">
+          <span class="tag tag-sand">Morning Swim</span>
+          <span class="tag tag-blue">Depart 3:25pm STT</span>
+          <span class="tag tag-green">Land MCO 6:40pm</span>
         </div>
-      </div>
-      <div class="compare-col">
-        <div class="pro-box" style="height:100%">
-          <div class="pc-item pro">The Baths are genuinely unlike anything else — giant boulder grottos and sea caves</div>
-          <div class="pc-item pro">Far fewer tourists than USVI hotspots</div>
-          <div class="pc-item pro">Snorkeling inside the caves is otherworldly</div>
-          <div class="pc-item pro">British Virgin Islands = true bucket list territory</div>
-          <div class="pc-item pro">Bragging rights — most people never make it to BVI</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CONS SIDE BY SIDE -->
-    <div class="compare-section-label reveal">✗ Cons</div>
-    <div class="compare-grid reveal">
-      <div class="compare-col">
-        <div class="con-box" style="height:100%">
-          <div class="pc-item con">Car ferry adds time vs. passenger-only ferry</div>
-          <div class="pc-item con">Trunk Bay can get crowded midday (go early)</div>
-        </div>
-      </div>
-      <div class="compare-col">
-        <div class="con-box" style="height:100%">
-          <div class="pc-item con">Everyone needs a valid passport — no exceptions</div>
-          <div class="pc-item con">~1.5–2 hours each way by boat</div>
-          <div class="pc-item con">BVI customs & immigration adds significant time</div>
-          <div class="pc-item con">Charter boat essentially required to make it worthwhile</div>
-          <div class="pc-item con">BVI clearance fees on top of charter cost</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TIP BOXES -->
-    <div class="compare-grid reveal" style="margin-top:16px">
-      <div class="compare-col">
-        <div class="tip-box">💡 <strong>Lime Out</strong> — the famous floating taco bar — is only reachable by boat. Charter gets you there seamlessly. Without one it's a $30/pp water taxi on top of the ferry.</div>
-      </div>
-      <div class="compare-col">
-        <div class="tip-box">💡 A private charter is basically <strong>required</strong> for this option — public ferry + BVI customs on a day trip is brutal. Budget for the charter if you vote Virgin Gorda.</div>
       </div>
     </div>
   </div>
@@ -1061,38 +1235,39 @@
 <section id="charter">
   <div class="container">
     <div class="reveal">
-      <div class="section-eyebrow">Open Question</div>
+      <div class="section-eyebrow">Day 3 Decision</div>
       <h2 class="section-title">Private Charter Boat?</h2>
-      <p class="section-sub">The big decision for Day 3. Here's the full case for and against.</p>
+      <p class="section-sub">Chase is researching options now. Book by April 19th — 60 days before departure.</p>
     </div>
     <div class="charter-wrapper reveal">
       <div class="charter-q">Do we charter a private boat for Day 3?</div>
-      <div class="charter-price">⚓ ~$150–300 per person · Full day on the water (incl. customs fees)</div>
+      <div class="charter-price">⚓ ~$100–200 per person · Full day on the water</div>
       <div class="charter-grid">
         <div class="pro-box" style="background:var(--palm-light);border:1px solid rgba(45,106,79,0.15)">
           <div class="pc-head pro">Yes — Charter it</div>
           <div class="pc-item pro">Private boat — just our group, our schedule</div>
-          <div class="pc-item pro">Visit multiple beaches in one day</div>
+          <div class="pc-item pro">Sail to St. John, multiple beach stops</div>
           <div class="pc-item pro">Open water swimming between stops</div>
-          <div class="pc-item pro">Lime Out floating restaurant included (saves $30/pp)</div>
-          <div class="pc-item pro">Captain handles all the navigation</div>
+          <div class="pc-item pro">Lime Out floating restaurant — sail right up (saves $30/pp water taxi)</div>
+          <div class="pc-item pro">Captain handles all navigation</div>
           <div class="pc-item pro">Coolers, shade, and hanging on deck</div>
-          <div class="pc-item pro">Only viable option for Virgin Gorda</div>
         </div>
         <div class="con-box" style="background:var(--coral-light);border:1px solid rgba(232,112,74,0.15)">
-          <div class="pc-head con">No — Skip It</div>
-          <div class="pc-item con">$150–300/pp is a real cost (includes customs fees)</div>
-          <div class="pc-item con">St. John ferry is totally doable on its own</div>
-          <div class="pc-item con">Less flexibility if weather changes plans</div>
+          <div class="pc-head con">No — Ferry it</div>
+          <div class="pc-item con">$100–200/pp is a real cost for the group</div>
+          <div class="pc-item con">Cars + ferry is totally doable and way cheaper</div>
+          <div class="pc-item con">Less flexibility if weather turns</div>
+          <div class="pc-item con">Lime Out becomes a $30/pp water taxi add-on</div>
         </div>
       </div>
       <div class="charter-without">
-        <strong style="color:var(--text)">Without a charter (St. John only):</strong><br>
-        Red Hook ferry (~$15–20/pp) → St. John taxi → Lime Out water taxi (~$30/pp) → taxi back → ferry back. Lots of transfers and per-person costs add up fast. Doable, but less seamless.
+        <strong style="color:var(--text)">Ferry option (Option B):</strong><br>
+        Drive rental cars onto the Red Hook ferry (~$15–20/pp rt) → cross to St. John in 20 min → drive to Trunk Bay → snorkel → water taxi to Lime Out (~$30/pp) → ferry back. More transfers but you keep the cars and full flexibility.
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- BUDGET -->
 <section id="budget">
@@ -1130,20 +1305,20 @@
       <div class="budget-card">
         <div class="budget-icon">🛏️</div>
         <div class="budget-label">Accommodation</div>
-        <div class="budget-value">~$450</div>
+        <div class="budget-value">~$500</div>
         <div class="budget-per">per person, full trip</div>
       </div>
       <div class="budget-card">
         <div class="budget-icon">⚓</div>
         <div class="budget-label">Charter Boat</div>
-        <div class="budget-value">$150–300</div>
-        <div class="budget-per">per person (if yes)</div>
+        <div class="budget-value">$100–200</div>
+        <div class="budget-per">per person (Option A)</div>
       </div>
       <div class="budget-card">
         <div class="budget-icon">⛴️</div>
         <div class="budget-label">St. John Ferry</div>
         <div class="budget-value">$15–20</div>
-        <div class="budget-per">per person, round trip</div>
+        <div class="budget-per">per person (Option B)</div>
       </div>
     </div>
 
@@ -1151,21 +1326,48 @@
       <h4>🚗 Rental car vs. taxi — rental wins for groups</h4>
       <ul>
         <li>No Uber or Lyft on St. Thomas — taxi association has a monopoly. Taxis charge <strong>per person</strong>, $10–30/pp each way.</li>
-        <li>A $100/day rental split among 4–5 people is just $20–25/person/day — far cheaper than taxis for island exploring.</li>
+        <li>Plan to book <strong>2 rental cars</strong> — Chase and Sidh as primary drivers. Splits cost and gives the group full flexibility to split up.</li>
+        <li>At ~$100/car/day split among the full group, rental cars beat taxis easily for getting around the island.</li>
         <li>Heads up: driving is on the <strong>left side of the road</strong> in USVI (steering wheel is still on the left though).</li>
-        <li>You <strong>can</strong> take your rental car on the St. John ferry — a big advantage over taxis for exploring the island.</li>
+        <li>You <strong>can</strong> take rental cars onto the St. John ferry — a major advantage for exploring the island freely.</li>
       </ul>
+    </div>
+
+    <div class="airbnb-block reveal">
+      <div class="airbnb-inner">
+        <div class="airbnb-left">
+          <div class="airbnb-eyebrow">Where We're Staying</div>
+          <div class="airbnb-title">St. Thomas Airbnb</div>
+          <div class="airbnb-desc">~$500/person for the full trip. Click to view the listing, photos, and full details on Airbnb.</div>
+          <a class="airbnb-btn" href="https://www.airbnb.com/l/Aflv5azp?s=67&unique_share_id=1afab94e-107d-413a-8369-f39476ae27a8" target="_blank" rel="noopener">
+            View on Airbnb ↗
+          </a>
+        </div>
+        <div class="airbnb-right">
+          <div class="airbnb-detail"><span>💰</span><span>~$500/person full trip</span></div>
+          <div class="airbnb-detail"><span>📍</span><span>St. Thomas, USVI</span></div>
+          <div class="airbnb-detail"><span>🗓️</span><span>June 18–21, 2026</span></div>
+          <div class="airbnb-detail"><span>🏠</span><span>Shared rental — split evenly</span></div>
+        </div>
+      </div>
     </div>
 
     <div class="budget-calc reveal">
       <div class="budget-calc-title">Trip Cost Calculator</div>
-      <div class="budget-calc-sub">Per person estimate · flip the charter toggle to see the difference</div>
+      <div class="budget-calc-sub">Per person estimate · choose your Day 3 option to see the total</div>
 
-      <label class="calc-toggle">
-        <input type="checkbox" id="charter-toggle" onchange="recalc()">
-        <span class="calc-toggle-label">⚓ Include private charter boat (Day 3)</span>
-        <span class="calc-toggle-price">+$150–300/pp (incl. customs)</span>
-      </label>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+        <label class="calc-toggle" style="margin-bottom:0">
+          <input type="radio" name="day3" id="toggle-ferry" value="ferry" onchange="recalc()" checked style="width:18px;height:18px;accent-color:var(--palm);cursor:pointer;flex-shrink:0">
+          <span class="calc-toggle-label">⛴️ Option B — Ferry + Cars to St. John</span>
+          <span class="calc-toggle-price">+$15–20/pp</span>
+        </label>
+        <label class="calc-toggle" style="margin-bottom:0">
+          <input type="radio" name="day3" id="toggle-charter" value="charter" onchange="recalc()" style="width:18px;height:18px;accent-color:var(--ocean);cursor:pointer;flex-shrink:0">
+          <span class="calc-toggle-label">⚓ Option A — Private Charter Boat</span>
+          <span class="calc-toggle-price">+$100–200/pp</span>
+        </label>
+      </div>
 
       <div class="calc-rows">
         <div class="calc-row">
@@ -1176,17 +1378,17 @@
         <div class="calc-row">
           <div class="calc-row-name">🛏️ Accommodation</div>
           <div class="calc-row-math">full trip / pp</div>
-          <div class="calc-row-val">$450</div>
+          <div class="calc-row-val">$500</div>
         </div>
         <div class="calc-row">
           <div class="calc-row-name">🌮 Lunch × 4 days</div>
           <div class="calc-row-math">4 × $15–25</div>
-          <div class="calc-row-val" id="lunch-val">$60–100</div>
+          <div class="calc-row-val">$60–100</div>
         </div>
         <div class="calc-row">
           <div class="calc-row-name">🍽️ Dinner × 3 nights</div>
           <div class="calc-row-math">3 × $25–30</div>
-          <div class="calc-row-val" id="dinner-val">$75–90</div>
+          <div class="calc-row-val">$75–90</div>
         </div>
         <div class="calc-row">
           <div class="calc-row-name">🚗 Rental car share × 4 days</div>
@@ -1198,15 +1400,15 @@
           <div class="calc-row-math">flat est.</div>
           <div class="calc-row-val">$15</div>
         </div>
-        <div class="calc-row">
-          <div class="calc-row-name">⛴️ St. John ferry (round trip)</div>
+        <div class="calc-row calc-row-optional active" id="ferry-row">
+          <div class="calc-row-name">⛴️ St. John ferry <span style="font-size:11px;color:var(--palm);font-weight:500">(Option B)</span></div>
           <div class="calc-row-math">$15–20/pp</div>
           <div class="calc-row-val">$15–20</div>
         </div>
         <div class="calc-row calc-row-optional" id="charter-row">
-          <div class="calc-row-name">⚓ Charter boat <span style="font-size:11px;color:var(--ocean);font-weight:500">(optional)</span></div>
-          <div class="calc-row-math">$150–300/pp</div>
-          <div class="calc-row-val">$150–300</div>
+          <div class="calc-row-name">⚓ Charter boat <span style="font-size:11px;color:var(--ocean);font-weight:500">(Option A)</span></div>
+          <div class="calc-row-math">$100–200/pp</div>
+          <div class="calc-row-val">$100–200</div>
         </div>
       </div>
 
@@ -1214,10 +1416,10 @@
       <div class="calc-total">
         <div>
           <div class="calc-total-label">Estimated total per person</div>
-          <div class="calc-total-sub" id="total-sub">Excluding charter · flights + hotel + food + car + ferry</div>
+          <div class="calc-total-sub" id="total-sub">Option B (ferry) · flights + hotel + food + car + ferry</div>
         </div>
         <div>
-          <div class="calc-total-val" id="total-val">$965–1,025</div>
+          <div class="calc-total-val" id="total-val">$1,015–1,075</div>
           <div style="font-size:11px;color:var(--text-muted);text-align:right">+ spending money</div>
         </div>
       </div>
@@ -1234,7 +1436,6 @@
     <div class="reveal">
       <div class="itinerary-tabs">
         <button class="itin-tab active" onclick="switchTab2('food-stt', this)">St. Thomas & St. John</button>
-        <button class="itin-tab" onclick="switchTab2('food-vg', this)">Virgin Gorda</button>
       </div>
 
       <!-- ST THOMAS & ST JOHN FOOD -->
@@ -1378,47 +1579,6 @@
         </div>
       </div>
 
-      <!-- VIRGIN GORDA FOOD -->
-      <div id="food-vg" class="itin-panel">
-        <div class="guide-grid">
-          <div class="guide-card">
-            <div class="guide-card-top" style="background:var(--gold-light)">
-              <div class="guide-emoji">🏔️</div>
-              <div class="guide-badge tag-gold">After The Baths</div>
-            </div>
-            <div class="guide-card-body">
-              <div class="guide-name">Top of the Baths Restaurant</div>
-              <div class="guide-desc">The natural stop after exploring the caves — panoramic views, Caribbean dishes, rum cocktails, and a pool. Order the jerk chicken, stewed fish, or fungi with whatever protein they're serving that day.</div>
-              <div class="guide-tags"><span class="tag tag-gold">Panoramic Views</span><span class="tag tag-sand">Lunch</span></div>
-            </div>
-          </div>
-          <div class="guide-card">
-            <div class="guide-card-top" style="background:var(--ocean-pale)">
-              <div class="guide-emoji">🍺</div>
-              <div class="guide-badge tag-blue">Beach Bar</div>
-            </div>
-            <div class="guide-card-body">
-              <div class="guide-name">Poorman's Bar at the Baths</div>
-              <div class="guide-desc">Right at the beach entrance. Cold Caribs (local beer), rum punches, and local snacks. Jump in the pool after your cave walk. Simple, cold, perfect.</div>
-              <div class="guide-tags"><span class="tag tag-blue">Beach Bar</span><span class="tag tag-sand">Snacks & Drinks</span></div>
-            </div>
-          </div>
-          <div class="guide-card">
-            <div class="guide-card-top" style="background:var(--palm-light)">
-              <div class="guide-emoji">🍗</div>
-              <div class="guide-badge tag-green">Local Plate</div>
-            </div>
-            <div class="guide-card-body">
-              <div class="guide-name">Local Plate Lunch</div>
-              <div class="guide-desc">Look for any local lunch counter in Spanish Town — oxtail, brown stew chicken, fungi, rice and peas, and fried plantains. The same dishes you love on St. Thomas, same quality, way fewer tourists around you.</div>
-              <div class="guide-tags"><span class="tag tag-green">Authentic</span><span class="tag tag-sand">Lunch</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="tip-box" style="margin-top:16px">
-          💡 Virgin Gorda is a day trip — eat a big breakfast on St. Thomas before you leave. Food options at the Baths are limited, and you'll be spending most of your time in the water anyway.
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1435,7 +1595,6 @@
       <div class="itinerary-tabs">
         <button class="itin-tab active" onclick="switchTab3('beach-stt', this)">St. Thomas</button>
         <button class="itin-tab" onclick="switchTab3('beach-stj', this)">St. John</button>
-        <button class="itin-tab" onclick="switchTab3('beach-vg', this)">Virgin Gorda</button>
       </div>
 
       <!-- ST THOMAS BEACHES -->
@@ -1530,43 +1689,6 @@
         </div>
       </div>
 
-      <!-- VIRGIN GORDA BEACHES -->
-      <div id="beach-vg" class="itin-panel">
-        <div class="beach-list">
-          <div class="beach-item reveal">
-            <div class="beach-rank">1</div>
-            <div class="beach-info">
-              <div class="beach-name">The Baths / Devil's Bay <span class="beach-pill tag-coral">Bucket List</span></div>
-              <div class="beach-desc">The whole reason you'd go to Virgin Gorda. Massive granite boulders form caves, grottos, and tidal pools. The trail through the rocks leads to secluded Devil's Bay beach. Otherworldly. Entry $3/person. Go before 8am or after 4pm to avoid crowds.</div>
-              <div class="beach-meta">🪨 Boulder caves · 🤿 Snorkeling · 🥾 Trail through grottos · ⛵ Boat access</div>
-            </div>
-          </div>
-          <div class="beach-item reveal">
-            <div class="beach-rank">2</div>
-            <div class="beach-info">
-              <div class="beach-name">Spring Bay <span class="beach-pill tag-blue">Hidden & Calm</span></div>
-              <div class="beach-desc">Just above The Baths in an area called The Crawl. Secluded rock pool swimming, picnic tables, barbecue grills, and kids' swings. Rarely crowded. Accessible by land or sea. A more peaceful alternative to the Baths chaos.</div>
-              <div class="beach-meta">🏊 Calm swimming · 🌿 Uncrowded · 🏕️ Picnic area · 📍 Near The Baths</div>
-            </div>
-          </div>
-          <div class="beach-item reveal">
-            <div class="beach-rank">3</div>
-            <div class="beach-info">
-              <div class="beach-name">Savannah Bay <span class="beach-pill tag-green">Untouched</span></div>
-              <div class="beach-desc">Long, undeveloped, wild beach — no vendors, no music, no shade structures. Just open space, turquoise sea, and total serenity. One of the most naturally beautiful beaches in the BVI. Bring your own water and snacks.</div>
-              <div class="beach-meta">🏝️ Undeveloped · 🌊 Open ocean · 🧘 Very quiet · 🚗 North of Spanish Town</div>
-            </div>
-          </div>
-          <div class="beach-item reveal">
-            <div class="beach-rank">4</div>
-            <div class="beach-info">
-              <div class="beach-name">Little Trunk Bay <span class="beach-pill tag-gold">Secret Gem</span></div>
-              <div class="beach-desc">Hidden gem just a 3-minute drive from Devil's Bay that almost no one visits. Pale sand, calm water, excellent snorkeling around the rocks at both ends. When the sea is flat, visibility is incredible.</div>
-              <div class="beach-meta">🤿 Incredible snorkeling · 🏝️ Secluded · 📍 Near The Baths · 🚗 Short drive</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1583,7 +1705,6 @@
       <div class="itinerary-tabs">
         <button class="itin-tab active" onclick="switchTab4('attr-stt', this)">St. Thomas</button>
         <button class="itin-tab" onclick="switchTab4('attr-stj', this)">St. John</button>
-        <button class="itin-tab" onclick="switchTab4('attr-vg', this)">Virgin Gorda</button>
       </div>
 
       <!-- ST THOMAS ATTRACTIONS -->
@@ -1663,34 +1784,6 @@
         </div>
       </div>
 
-      <!-- VIRGIN GORDA ATTRACTIONS -->
-      <div id="attr-vg" class="itin-panel">
-        <div class="attr-grid">
-          <div class="attr-card reveal">
-            <div class="attr-icon">🪨</div>
-            <div class="attr-title">The Baths National Park</div>
-            <div class="attr-desc">The undisputed #1 attraction in the BVI. Giant granite boulders forming caves, grottos, and tidal pools. Hike the 1.1km loop through The Caves to Devil's Bay beach. Entry $3/person. Slippery rocks — wear swim shoes.</div>
-          </div>
-          <div class="attr-card reveal">
-            <div class="attr-icon">🏗️</div>
-            <div class="attr-title">Copper Mine Ruins</div>
-            <div class="attr-desc">Historic 19th-century copper mine ruins perched dramatically on sea cliffs at the island's southeastern tip. Abandoned in 1862, the stone ruins against the crashing Atlantic surf make for incredible photos. Free to visit.</div>
-          </div>
-          <div class="attr-card reveal">
-            <div class="attr-icon">🌋</div>
-            <div class="attr-title">Gorda Peak Hike</div>
-            <div class="attr-desc">Hike to the island's highest point for panoramic views across the BVI chain. The trail winds through one of the last remaining Caribbean dry forests — home to the world's smallest lizard, the Virgin Gorda gecko.</div>
-          </div>
-          <div class="attr-card reveal">
-            <div class="attr-icon">🤿</div>
-            <div class="attr-title">Snorkeling at The Baths</div>
-            <div class="attr-desc">Snorkel within the national park's buoy line around the boulders. Vibrant marine life, healthy coral, and incredible visibility. The tidal pools inside The Caves are otherworldly. Bring your own gear or rent nearby.</div>
-          </div>
-        </div>
-        <div class="tip-box" style="margin-top:16px">
-          💡 <strong>Virgin Gorda is a day-trip island for us.</strong> The Baths + snorkeling + a lunch stop at Top of the Baths is a full and perfect day. Don't try to cram in too many things — the Baths themselves deserve 2–3 hours.
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1711,14 +1804,28 @@
       document.getElementById('countdown').innerHTML = '<div style="color:#fff;font-family:Playfair Display,serif;font-size:22px">We\'re in paradise! 🌴</div>';
       return;
     }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+    const totalSecs = Math.floor(diff / 1000);
+    const secs  = totalSecs % 60;
+    const totalMins = Math.floor(totalSecs / 60);
+    const mins  = totalMins % 60;
+    const totalHours = Math.floor(totalMins / 60);
+    const hours = totalHours % 24;
+    // calendar months
+    let months = (trip.getFullYear() - now.getFullYear()) * 12 + (trip.getMonth() - now.getMonth());
+    if (trip.getDate() < now.getDate()) months--;
+    if (months < 0) months = 0;
+    // weeks + days remaining after whole months
+    const afterMonths = new Date(now);
+    afterMonths.setMonth(afterMonths.getMonth() + months);
+    const daysLeft = Math.floor((trip - afterMonths) / 86400000);
+    const weeks = Math.floor(daysLeft / 7);
+    const days  = daysLeft % 7;
+    document.getElementById('cd-months').textContent = String(months).padStart(2,'0');
+    document.getElementById('cd-weeks').textContent  = String(weeks).padStart(2,'0');
+    document.getElementById('cd-days').textContent   = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent  = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent   = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent   = String(secs).padStart(2,'0');
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
@@ -1742,19 +1849,19 @@
   }
 
   function switchTab2(id, btn) {
-    ['food-stt','food-vg'].forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
+    ['food-stt'].forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
     btn.closest('div').querySelectorAll('.itin-tab').forEach(b => b.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     btn.classList.add('active');
   }
   function switchTab3(id, btn) {
-    ['beach-stt','beach-stj','beach-vg'].forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
+    ['beach-stt','beach-stj'].forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
     btn.closest('div').querySelectorAll('.itin-tab').forEach(b => b.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     btn.classList.add('active');
   }
   function switchTab4(id, btn) {
-    ['attr-stt','attr-stj','attr-vg'].forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
+    ['attr-stt','attr-stj'].forEach(i => { const el = document.getElementById(i); if(el) el.classList.remove('active'); });
     btn.closest('div').querySelectorAll('.itin-tab').forEach(b => b.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     btn.classList.add('active');
@@ -1762,19 +1869,24 @@
 
   // ── BUDGET CALCULATOR ──
   function recalc() {
-    var withCharter = document.getElementById('charter-toggle').checked;
-    var row = document.getElementById('charter-row');
-    var totalEl = document.getElementById('total-val');
-    var subEl = document.getElementById('total-sub');
-    row.classList.toggle('active', withCharter);
-    // flights(250) + hotel(450) + lunch(60-100) + dinner(75-90) + car(100) + gas(15) + ferry(15-20) = 965-1025
-    // + charter(150-300) = 1115-1325
-    if (withCharter) {
-      totalEl.textContent = '$1,115–1,325';
-      subEl.textContent = 'Including charter · flights + hotel + food + car + ferry + boat';
+    var isCharter = document.getElementById('toggle-charter').checked;
+    var ferryRow   = document.getElementById('ferry-row');
+    var charterRow = document.getElementById('charter-row');
+    var totalEl    = document.getElementById('total-val');
+    var subEl      = document.getElementById('total-sub');
+    // base: flights(250) + hotel(500) + lunch(60-100) + dinner(75-90) + car(100) + gas(15) = 1000-1055
+    // Option B (ferry): + 15-20 = 1015-1075
+    // Option A (charter): + 100-200 = 1100-1255
+    if (isCharter) {
+      ferryRow.classList.remove('active');
+      charterRow.classList.add('active');
+      totalEl.textContent = '$1,100–1,255';
+      subEl.textContent = 'Option A (charter) · flights + hotel + food + car + boat';
     } else {
-      totalEl.textContent = '$965–1,025';
-      subEl.textContent = 'Excluding charter · flights + hotel + food + car + ferry';
+      charterRow.classList.remove('active');
+      ferryRow.classList.add('active');
+      totalEl.textContent = '$1,015–1,075';
+      subEl.textContent = 'Option B (ferry) · flights + hotel + food + car + ferry';
     }
   }
   recalc();
